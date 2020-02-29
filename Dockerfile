@@ -9,12 +9,13 @@ LABEL "com.github.actions.description"="Check ansible role or playbook with Cent
 LABEL "com.github.actions.icon"="aperture"
 LABEL "com.github.actions.color"="green"
 
-RUN yum update --assumeyes && yum install --assumeyes \
-    python3 \
-    python3-pip \
+RUN yum update --assumeyes && yum install --assumeyes epel-release
+
+RUN yum install --assumeyes python \
+    python-pip \
     git
 
-RUN pip3 install setuptools && pip3 install ansible
+RUN pip install setuptools && pip install ansible
 
 RUN ansible --version
 

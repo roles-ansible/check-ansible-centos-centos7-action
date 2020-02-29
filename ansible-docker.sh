@@ -25,12 +25,12 @@ fact_caching = jsonfile
 fact_caching_connection = $HOME/facts
 fact_caching_timeout = 7200
 stdout_callback = yaml
-ansible_python_interpreter=/usr/bin/python3
+ansible_python_interpreter=/usr/bin/python2
 ansible_connection=local
 """ | tee ansible.cfg
 
   # create host list
-  echo -e "[local]\nlocalhost ansible_python_interpreter=/usr/bin/python3 ansible_connection=local" | tee host.ini
+  echo -e "[local]\nlocalhost ansible_python_interpreter=/usr/bin/python2 ansible_connection=local" | tee host.ini
 }
 ansible::test::role() {
   : "${TARGETS?No targets to check. Nothing to do.}"
@@ -56,7 +56,7 @@ ansible::test::playbook() {
   : "${GROUP?Please define the group your playbook is written for!}"
   pushd ${GITHUB_WORKSPACE}
 
-  echo -e "[${GROUP}]\n${HOSTS} ansible_python_interpreter=/usr/bin/python3 ansible_connection=local ansible_host=127.0.0.1" | tee host.ini
+  echo -e "[${GROUP}]\n${HOSTS} ansible_python_interpreter=/usr/bin/python2 ansible_connection=local ansible_host=127.0.0.1" | tee host.ini
 
   # execute playbook
   ansible-playbook --connection=local --inventory host.ini ${TARGETS} 
