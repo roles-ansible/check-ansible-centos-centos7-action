@@ -1,23 +1,18 @@
-FROM debian:stable
+FROM centos:centos7
 
 LABEL "maintainer"="L3D <l3d@c3woc.de>"
-LABEL "repository"="https://github.com/roles-ansible/check-ansible-debian-stable-action.git"
-LABEL "homepage"="https://github.com/roles-ansible/check-ansible-debian-stable-action"
+LABEL "repository"="https://github.com/roles-ansible/check-ansible-centos-centos7-action.git"
+LABEL "homepage"="https://github.com/roles-ansible/check-ansible-centos-centos7-action"
 
-LABEL "com.github.actions.name"="check-ansible-debian-stable"
-LABEL "com.github.actions.description"="Check ansible role or playbook with Debian stable"
+LABEL "com.github.actions.name"="check-ansible-centos-centos7"
+LABEL "com.github.actions.description"="Check ansible role or playbook with CentOS centos7"
 LABEL "com.github.actions.icon"="aperture"
 LABEL "com.github.actions.color"="green"
 
-RUN apt-get update -y && apt-get install -y \
-    software-properties-common \
-    build-essential \
-    libffi-dev \
-    libssl-dev \
-    python3-dev \
+RUN yum update --assumeyes && yum install --assumeyes \
+    python3 \
     python3-pip \
-    git \
-    systemd
+    git
 
 RUN pip3 install setuptools && pip3 install ansible
 
