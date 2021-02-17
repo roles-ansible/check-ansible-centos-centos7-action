@@ -11,11 +11,8 @@ LABEL "com.github.actions.color"="green"
 
 RUN yum update --assumeyes && yum install --assumeyes epel-release
 
-RUN yum install --assumeyes python \
-    python-pip \
+RUN yum install --assumeyes ansible \
     git
-
-RUN pip install setuptools && pip install ansible
 
 RUN ansible --version
 
