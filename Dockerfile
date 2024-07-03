@@ -9,6 +9,10 @@ LABEL "com.github.actions.description"="Check ansible role or playbook with Cent
 LABEL "com.github.actions.icon"="aperture"
 LABEL "com.github.actions.color"="green"
 
+# link to vault after EOL for testing purposes only
+RUN sed -i -e "/mirrorlist=/d" /etc/yum.repos.d/*.repo
+RUN sed -i -e "s|#baseurl=http://mirror|baseurl=https://vault|" /etc/yum.repos.d/*.repo
+
 RUN yum update --assumeyes && yum install --assumeyes epel-release
 
 RUN yum install --assumeyes ansible \
